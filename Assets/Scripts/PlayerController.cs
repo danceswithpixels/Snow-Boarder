@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     float baseSpeed;
     float boostSpeed;
     [SerializeField] float boostSpeedIncrease = 10f;
+    bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
-        RespondToBoost();
+        if (canMove) {
+            RotatePlayer();
+            RespondToBoost();
+        }
+    }
+
+    public void DisableControls() {
+        canMove = false;
     }
 
     void RespondToBoost()
@@ -47,5 +54,9 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddTorque(-torqueAmount);
         }
+    }
+
+    public bool getCanMove() {
+        return canMove;
     }
 }
